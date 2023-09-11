@@ -10,6 +10,6 @@ services:
       - DISPLAY=:0
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - $PWD/gamedir_beta:/home/user/Steam
+      - /opt/empyrion/gamedir_beta:/home/user/Steam
     network_mode: host
     restart: unless-stopped
