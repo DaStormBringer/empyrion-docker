@@ -3,7 +3,7 @@ FROM ubuntu:focal
 RUN export DEBIAN_FRONTEND noninteractive && \
     dpkg --add-architecture i386 && \
     apt-get update && \
-    apt-get install -y net-tools tar unzip curl xz-utils gnupg2 software-properties-common xvfb libc6:i386 locales && \
+    apt-get install -y net-tools tar unzip curl xz-utils gnupg2 software-properties-common xvfb libc6:i386 locales glibc.i686 libstdc++.i686 lib32gcc-s1 && \
     echo en_US.UTF-8 UTF-8 >> /etc/locale.gen && locale-gen && \
     curl -s https://dl.winehq.org/wine-builds/winehq.key | apt-key add - && \
     apt-add-repository -y 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' && \
@@ -17,7 +17,7 @@ ENV HOME /home/user
 WORKDIR /home/user
 VOLUME /home/user/Steam
 
-RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar xz
+RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 
 # Get's killed at the end
 RUN ./steamcmd.sh +login anonymous +quit || :
