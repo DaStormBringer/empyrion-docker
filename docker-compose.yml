@@ -13,3 +13,4 @@ services:
       - /opt/empyrion/gamedir_beta:/home/user/Steam
     network_mode: host
     restart: unless-stopped
+    command: ["-dedicated", "z:/server/Saves/Games/The_Game/dedicated.yaml"]
