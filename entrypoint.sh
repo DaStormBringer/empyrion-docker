@@ -1,5 +1,7 @@
 #!/bin/bash -ex
 
+##Empyrion AppID 383120
+##RE 1.10 2918811239
 [ "$UID" != 0 ] || {
     mkdir -p ~user/Steam
     chown user: ~user/Steam
