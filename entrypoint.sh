@@ -1,5 +1,5 @@
 #!/bin/bash -ex
-
+#Notes: steamcmd +login anonymous +force_install_dir c:\Empyrion +app_update 530870 validate +quit
 ##Empyrion AppID 383120
 ##RE 1.10 2918811239
 [ "$UID" != 0 ] || {
