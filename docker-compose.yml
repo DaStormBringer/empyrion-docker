@@ -13,6 +13,3 @@ services:
       - $PWD/gamedir_beta:/home/user/Steam
     network_mode: host
     restart: unless-stopped
-    ports:
-      - "30000:30000/udp"
-      - "30000:30000/tcp"
