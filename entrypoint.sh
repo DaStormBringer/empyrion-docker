@@ -17,6 +17,7 @@ STEAMCMD="./steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous $S
 
 # eval to support quotes in $STEAMCMD
 eval "$STEAMCMD +app_update 530870 +quit"
+eval "$STEAMCMD +app_update 2550354956 +quit"
 
 mkdir -p "$GAMEDIR/Logs"
 
