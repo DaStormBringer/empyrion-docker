@@ -4,7 +4,7 @@ services:
   empyrion:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.linux
     container_name: empyrion_container
     environment:
       - DISPLAY=:0
