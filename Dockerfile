@@ -14,7 +14,9 @@ RUN export DEBIAN_FRONTEND noninteractive && \
     rm -rf /var/lib/apt/lists/* && \
     ln -s '/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/' /server && \
     useradd -m user
-RUN apt-get install -y git
+    
+RUN export DEBIAN_FRONTEND noninteractive && apt-get update && apt-get install -y git
+
 USER user
 ENV HOME /home/user
 WORKDIR /home/user
