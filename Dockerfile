@@ -1,5 +1,8 @@
 FROM ubuntu:focal
 
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
 RUN export DEBIAN_FRONTEND noninteractive && \
     dpkg --add-architecture i386 && \
     apt-get update && \
