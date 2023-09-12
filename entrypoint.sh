@@ -11,17 +11,16 @@
 
 GAMEDIR="$HOME/Steam/steamapps/common/Empyrion - Dedicated Server/DedicatedServer"
 
-#CLONEDIR="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/Content/Scenarios"
-#cd "$CLONEDIR"
-#eval git clone https://github.com/xSevithx/Empyrion-REFiles.git ReforgedEden
-
 cd "$HOME"
 STEAMCMD="./steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous $STEAMCMD"
 [ -z "$BETA" ] || STEAMCMD="$STEAMCMD -beta experimental"
 
 # eval to support quotes in $STEAMCMD
 eval "$STEAMCMD +app_update 530870 +quit"
-eval "$STEAMCMD workshop_download_item 383120 2550354956"
+
+CLONEDIR="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/Content/Scenarios"
+cd "$CLONEDIR"
+eval git clone https://github.com/xSevithx/Empyrion-REFiles.git ReforgedEden
 
 mkdir -p "$GAMEDIR/Logs"
 
