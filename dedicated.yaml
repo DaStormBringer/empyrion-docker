@@ -1,6 +1,6 @@
 ServerConfig:
   Srv_Port: 30000
-  Srv_Name: Event Horizon | Reforged Eden | PVE | 99% Uptime
+  Srv_Name: Event Horizon | Reforged Eden 1.10 UPDATE | PVE | 99% Uptime
   Srv_MaxPlayers: 250
   Srv_ReservePlayfields: 5
   Srv_Description: Come play with us!
