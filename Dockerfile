@@ -30,5 +30,7 @@ USER root
 RUN mkdir /tmp/.X11-unix && chmod 1777 /tmp/.X11-unix
 
 EXPOSE 30000/udp
+ADD dedicated.yaml /
+ADD adminconfig.yaml /
 ADD entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
