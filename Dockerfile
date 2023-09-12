@@ -6,7 +6,7 @@ ENV LC_ALL C.UTF-8
 RUN export DEBIAN_FRONTEND noninteractive && \
     dpkg --add-architecture i386 && \
     apt-get update && \
-    apt-get install -y net-tools tar unzip curl xz-utils gnupg2 software-properties-common xvfb libc6:i386 locales && \
+    apt-get install -y git net-tools tar unzip curl xz-utils gnupg2 software-properties-common xvfb libc6:i386 locales && \
     echo en_US.UTF-8 UTF-8 >> /etc/locale.gen && locale-gen && \
     curl -s https://dl.winehq.org/wine-builds/winehq.key | apt-key add - && \
     apt-add-repository -y 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' && \
