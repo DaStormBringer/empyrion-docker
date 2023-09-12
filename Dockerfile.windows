@@ -1,4 +1,5 @@
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+#This is not something I have tested as I run from a windows platform, not windows.
+FROM mcr.microsoft.com/windows:ltsc2019
 
 # Set environment variables
 ENV GIT_VERSION="2.34.0"
