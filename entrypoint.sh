@@ -11,9 +11,9 @@
 
 GAMEDIR="$HOME/Steam/steamapps/common/Empyrion - Dedicated Server/DedicatedServer"
 
-CLONEDIR="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/Content/Scenarios"
-cd "$CLONEDIR"
-eval git clone https://github.com/xSevithx/Empyrion-REFiles.git ReforgedEden
+#CLONEDIR="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/Content/Scenarios"
+#cd "$CLONEDIR"
+#eval git clone https://github.com/xSevithx/Empyrion-REFiles.git ReforgedEden
 
 cd "$HOME"
 STEAMCMD="./steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous $STEAMCMD"
