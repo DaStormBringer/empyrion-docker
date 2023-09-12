@@ -4,7 +4,7 @@ import time
 # Empyrion server Telnet information
 server_ip = "127.0.0.1"  # Replace with your server's IP address
 server_port = 30004  # Default Telnet port for Empyrion server
-admin_password = "your_admin_password"  # Replace with your admin password
+admin_password = "password"  # Replace with your admin password
 
 # Message to send
 message = "Hello, players! This is a server announcement."
