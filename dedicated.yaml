@@ -1,1 +1,20 @@
-
+ServerConfig:
+  Srv_Port: 30000
+  Srv_Name: Event Horizon | Reforged Eden | PVE | 99% Uptime
+  Srv_MaxPlayers: 250
+  Srv_ReservePlayfields: 5
+  Srv_Description: Come play with us!
+  Srv_Public: true
+  AdminConfigFile: adminconfig.yaml
+  Tel_Port: 30004
+  SaveDirectory: Saves
+  EACActive: true
+  MaxAllowedSizeClass: 10
+  AllowedBlueprints: All
+  HeartbeatServer: 15
+  TimeoutBootingPfServer: 90
+GameConfig:
+  GameName: DediGame
+  Mode: Survival
+  Seed: 1011345
+  CustomScenario: Default Multiplayer
