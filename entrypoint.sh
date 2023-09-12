@@ -19,8 +19,18 @@ STEAMCMD="./steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous $S
 eval "$STEAMCMD +app_update 530870 +quit"
 
 CLONEDIR="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/Content/Scenarios"
-cd "$CLONEDIR"
-eval git clone https://github.com/xSevithx/Empyrion-REFiles.git ReforgedEden
+REPO_URL="https://github.com/xSevithx/Empyrion-REFiles.git"
+REPO_DIR="ReforgedEden"
+
+# Check if the repository directory already exists
+if [ ! -d "$CLONEDIR/$REPO_DIR" ]; then
+    cd "$CLONEDIR"
+    git clone "$REPO_URL" "$REPO_DIR"
+else
+    echo "Repository directory '$REPO_DIR' already exists. Skipping clone."
+fi
+
+#End RE Clone
 
 mkdir -p "$GAMEDIR/Logs"
 
