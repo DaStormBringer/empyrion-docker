@@ -6,7 +6,9 @@ ServerConfig:
   Srv_Description: Come play with us!
   Srv_Public: true
   AdminConfigFile: adminconfig.yaml
+  Tel_Enabled: true
   Tel_Port: 30004
+  Tel_Pwd: 'password'
   SaveDirectory: Saves
   EACActive: true
   MaxAllowedSizeClass: 10
