@@ -17,4 +17,4 @@ GameConfig:
   GameName: DediGame
   Mode: Survival
   Seed: 1011345
-  CustomScenario: Default Multiplayer
+  CustomScenario: ReforgedEden
