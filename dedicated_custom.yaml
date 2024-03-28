@@ -1,0 +1,28 @@
+ServerConfig:
+  Srv_Port: 30000
+  Srv_Name: Reforged Eden 1.11 Docker
+  Srv_Password: 2706
+  Srv_MaxPlayers: 250
+  Srv_ReservePlayfields: 5
+  
+  ### Server description shown in Server Browser
+  ### max 127 chars: "-------------------------------------------------------------------------------------------------------------------------------"
+  Srv_Description: Come play with us!
+  
+  Srv_Public: true
+  #Tel_Enabled: true
+  #Tel_Port: 30004
+  #Tel_Pwd: 'password'
+  SaveDirectory: Saves
+  EACActive: false
+  MaxAllowedSizeClass: 0
+  AllowedBlueprints: All
+  HeartbeatServer: 15
+  TimeoutBootingPfServer: 90
+  AdminConfigFile: adminconfig.yaml
+  
+GameConfig:
+  GameName: Reforged Eden
+  Mode: Survival
+  Seed: 1011345
+  CustomScenario: Reforged Eden
