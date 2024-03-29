@@ -11,6 +11,7 @@
     exit 0
 }
 
+GAMEBASE="$HOME/Steam/steamapps/common/Empyrion - Dedicated Server"
 GAMEDIR="$HOME/Steam/steamapps/common/Empyrion - Dedicated Server/DedicatedServer"
 
 cd "$HOME"
@@ -22,17 +23,20 @@ STEAMCMD="./steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous +a
 # eval to support quotes in $STEAMCMD
 eval "$STEAMCMD +quit"
 
-SCENARIOS_DIR="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/Content/Scenarios"
-RE_DIR="Reforged Eden 2"
 
-# Check if the repository directory already exists
-if [ ! -d "$SCENARIOS_DIR/$RE_DIR" ]; then
-    cd "$SCENARIOS_DIR"
-   #  SOmething something maybe download and unzip
+CLONEDIR="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/Content"
+UPDATEFILE="update"
+REPO_URL="https://https://github.com/DaStormBringer/empyrion-ReforgedEden.git"
+REPO_DIR="Scenarios"
+
+# use [ touch update ] to create a file in the base game dir. If it exsists git will update the file
+if [ -f "$GAMEBASE/$UPDATEFILE" ]; then
+    cd "$CLONEDIR"  
+    git clone "$REPO_URL" "$REPO_DIR"
+    rm -f "$GAMEBASE/$UPDATEFILE"
 else
-    echo "Scenarios directory '$RE_DIR' already exists. Skipping clone."
+    echo "Update not Requested. Skipping clone."
 fi
-
 
 mkdir -p "$GAMEDIR/Logs"
 
@@ -49,4 +53,5 @@ sh -c 'until [ "`netstat -ntl | tail -n+3`" ]; do sleep 1; done
 sleep 5 # gotta wait for it to open a logfile
 tail -F Logs/current.log ../Logs/*/*.log 2>/dev/null' &
 
+# We use dedicated_custom.yaml for server setup so that game updates does not overwrite the configuration
 /opt/wine-staging/bin/wine ./EmpyrionDedicated.exe -batchmode -nographics -dedicated /dedicated_custom.yaml -logFile Logs/current.log "$@" &> Logs/wine.log

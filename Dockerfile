@@ -39,5 +39,6 @@ EXPOSE 30004/udp
 ADD messages.py /
 ADD dedicated_custom.yaml /
 ADD adminconfig.yaml /
+ADD update /
 ADD entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]

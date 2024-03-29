@@ -1,13 +1,13 @@
 ServerConfig:
   Srv_Port: 30000
-  Srv_Name: Reforged Eden 1.11 Docker
-  Srv_Password: 2706
+  Srv_Name: Reforged Eden 2 Docker Test
+  Srv_Password: OU812
   Srv_MaxPlayers: 250
   Srv_ReservePlayfields: 5
   
   ### Server description shown in Server Browser
   ### max 127 chars: "-------------------------------------------------------------------------------------------------------------------------------"
-  Srv_Description: Come play with us!
+  Srv_Description: Reforged Eden 2 Docker w/ Wine Test
   
   Srv_Public: true
   #Tel_Enabled: true
@@ -19,10 +19,16 @@ ServerConfig:
   AllowedBlueprints: All
   HeartbeatServer: 15
   TimeoutBootingPfServer: 90
-  AdminConfigFile: adminconfig.yaml
-  
+
+# Pick one and uncomment  
 GameConfig:
-  GameName: Reforged Eden
+  GameName: Reforged Eden 2
   Mode: Survival
   Seed: 1011345
-  CustomScenario: Reforged Eden
+  CustomScenario: Reforged Eden 2
+  
+#GameConfig:
+#  GameName: Reforged Eden
+#  Mode: Survival
+#  Seed: 1011345
+#  CustomScenario: Reforged Eden
