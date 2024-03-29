@@ -23,10 +23,10 @@ STEAMCMD="./steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous +a
 eval "$STEAMCMD +quit"
 
 SCENARIOS_DIR="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/Content/Scenarios"
-RE_DIR="ReforgedEden2"
+RE_DIR="Reforged Eden 2"
 
 # Check if the repository directory already exists
-if [ ! -d "$SCENARIOS_DIR/$REPO_DIR" ]; then
+if [ ! -d "$SCENARIOS_DIR/$RE_DIR" ]; then
     cd "$SCENARIOS_DIR"
    #  SOmething something maybe download and unzip
 else
