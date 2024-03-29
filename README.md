@@ -9,13 +9,18 @@ Sample invocation:
 cd empyrion-docker
 docker build -t empyrion-dedicated-server .
 mkdir -p gamedir
-docker run -di -p 30000:30000/udp -p 30001:30001/udp --restart unless-stopped -v $PWD/gamedir:/home/user/Steam empyrion-dedicated-server
+docker run -di --name emp -p 30000:30000/udp -p 30001:30001/udp --restart unless-stopped -v $PWD/gamedir:/home/user/Steam empyrion-dedicated-server
 
 # for experimental version:
 cd empyrion-docker
 docker build -t empyrion-dedicated-server .
 mkdir -p gamedir_beta
-docker run -di -p 30000:30000/udp --restart unless-stopped -v $PWD/gamedir_beta:/home/user/Steam -e BETA=1 empyrion-dedicated-server
+docker run -di --name emp -p 30000:30000/udp -p 30001:30001/udp --restart unless-stopped -v $PWD/gamedir_beta:/home/user/Steam -e BETA=1 empyrion-dedicated-server
+
+after first run you can use:
+docker start emp
+docker stop emp  
+to control the server
 ```
 
 After starting the server, you can edit the dedicated.yaml file at 'gamedir/steamapps/common/Empyrion - Dedicated Server/dedicated.yaml'.
@@ -25,7 +30,7 @@ The DedicatedServer folder has been symlinked to /server, so that you can refer 
 ```
 # cp -r /..../Saves/Games/The_Game 'gamedir/steamapps/common/Empyrion - Dedicated Server/Saves/Games/'
 # you might want a symlink for games: ln -s 'gamedir/steamapps/common/Empyrion - Dedicated Server/Saves/Games'
-docker run -di -p 30000:30000/udp --restart unless-stopped -v $PWD/gamedir:/home/user/Steam bitr/empyrion-server -dedicated 'z:/server/Saves/Games/The_Game/dedicated.yaml'
+docker run -di --name emp -p 30000:30000/udp -p 30001:30001/udp --restart unless-stopped -v $PWD/gamedir:/home/user/Steam bitr/empyrion-server -dedicated 'z:/server/Saves/Games/The_Game/dedicated.yaml'
 ```
 
 To append arguments to the steamcmd command, use `-e "STEAMCMD=..."`. Example: `-e "STEAMCMD=+runscript /home/user/Steam/addmods.txt"`.
