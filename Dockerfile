@@ -24,6 +24,7 @@ RUN export DEBIAN_FRONTEND noninteractive && apt-get update && apt-get install -
 USER user
 ENV HOME /home/user
 WORKDIR /home/user
+VOLUME /home/user/steam
 ARG destination="steamapps/common/Empyrion - Dedicated Server/"
 
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
@@ -39,12 +40,12 @@ EXPOSE 30002/udp
 EXPOSE 30003/udp
 EXPOSE 30004/udp
 
+WORKDIR "/home/user/steam/steamapps/common/Empyrion - Dedicated Server"
 
-COPY messages.py ${destination}
-COPY dedicated_custom.yaml ${destination}
-COPY adminconfig.yaml ${destination}
-COPY update ${destination}
+COPY messages.py .
+COPY dedicated_custom.yaml .
+COPY adminconfig.yaml .
+COPY update .
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
-VOLUME /home/user/Steam
 ENTRYPOINT ["/entrypoint.sh"]
