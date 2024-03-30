@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM ubuntu:jammy
 
 LABEL maintainer="DaStormBringer"
@@ -43,10 +44,10 @@ EXPOSE 30004/udp
 
 RUN chown -R user:user "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 
-COPY messages.py .
-COPY dedicated_custom.yaml .
-COPY adminconfig.yaml .
-COPY update .
+COPY --chown=user:user messages.py .
+COPY --chown=user:user dedicated_custom.yaml .
+COPY --chown=user:user adminconfig.yaml .
+COPY --chown=user:user update .
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
