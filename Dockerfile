@@ -37,11 +37,6 @@ ENV HOME /home/user
 WORKDIR /home/user
 VOLUME /home/user/Steam
 
-COPY --chown=user:user messages.py ${target}
-COPY --chown=user:user dedicated_custom.yaml ${target}
-COPY --chown=user:user adminconfig.yaml ${target}
-COPY --chown=user:user update ${target}
-
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 
 # Get's killed at the end
@@ -56,6 +51,13 @@ EXPOSE 30001/udp
 EXPOSE 30002/udp
 EXPOSE 30003/udp
 EXPOSE 30004/udp
+
+VOLUME "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
+
+COPY --chown=user:user messages.py .
+COPY --chown=user:user dedicated_custom.yaml .
+COPY --chown=user:user adminconfig.yaml .
+COPY --chown=user:user update .
 
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
