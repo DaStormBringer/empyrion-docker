@@ -28,10 +28,10 @@ RUN chown -R user:user "/home/user/Steam/steamapps/common/Empyrion - Dedicated S
 RUN ls -lah "/home/user/Steam"
 
 ARG target="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
-COPY messages.py ${target}
-COPY dedicated_custom.yaml ${target}
-COPY adminconfig.yaml ${target}
-COPY update ${target}
+COPY --chown=user:user messages.py ${target}
+COPY --chown=user:user dedicated_custom.yaml ${target}
+COPY --chown=user:user adminconfig.yaml ${target}
+COPY --chown=user:user update ${target}
 
 RUN ls -lah "${target}"
 
