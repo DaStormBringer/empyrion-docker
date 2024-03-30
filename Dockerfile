@@ -30,7 +30,7 @@ RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.t
 # Get's killed at the end
 RUN ./steamcmd.sh +login anonymous +quit || :
 
-WORKDIR "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
+WORKDIR "Steam/steamapps/common/Empyrion - Dedicated Server"
 
 USER root
 RUN mkdir /tmp/.X11-unix && chmod 1777 /tmp/.X11-unix
