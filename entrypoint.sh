@@ -25,12 +25,12 @@ eval "$STEAMCMD +quit"
 
 
 CLONEDIR="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/Content"
-UPDATEFILE="update"
 REPO_URL="https://https://github.com/DaStormBringer/empyrion-ReforgedEden.git"
 REPO_DIR="Scenarios"
 
+
 # use [ touch update ] to create a file in the base game dir. If it exsists git will update the file
-if [ -f "$GAMEBASE/$UPDATEFILE" ]; then
+if [ -f "$GAMEBASE/update" ]; then
     cd "$CLONEDIR"  
     git clone "$REPO_URL" "$REPO_DIR"
     rm -f "$GAMEBASE/$UPDATEFILE"
@@ -38,7 +38,12 @@ else
     echo "Update not Requested. Skipping clone."
 fi
 
-mkdir -p "$GAMEDIR/Logs"
+# if the Admin Config is in the base Directory move it to the correct dir
+if [ -f "$GAMEBASE/adminconfig.yaml" ]; then
+	 mv "$GAMEBASE"/adminconfig.yaml "$GAMEBASE"/Saves
+fi
+
+mkdir -p "$GAMEDIR"/Logs
 
 rm -f /tmp/.X1-lock
 Xvfb :1 -screen 0 800x600x24 -nolisten unix &
