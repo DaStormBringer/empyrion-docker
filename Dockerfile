@@ -25,6 +25,9 @@ RUN export DEBIAN_FRONTEND noninteractive && apt-get update && apt-get install -
 RUN mkdir -p "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 RUN chown -R user:user "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 
+RUN ls -lah "/home/user/Steam"
+RUN ls -lah "/home/user/Steam/steamapps/common"
+
 RUN ls -lah "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 
 USER user
