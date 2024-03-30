@@ -16,7 +16,7 @@ RUN export DEBIAN_FRONTEND noninteractive && \
     apt-add-repository -y 'deb https://dl.winehq.org/wine-builds/ubuntu/ jammy main' && \
     apt-get install -y wine-staging wine-staging-i386 wine-staging-amd64 winetricks && \
     rm -rf /var/lib/apt/lists/* && \
-    ln -s '/home/user/steam/steamapps/common/Empyrion - Dedicated Server/' /server && \
+    ln -s '/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/' /server && \
     useradd -m user
     
 RUN export DEBIAN_FRONTEND noninteractive && apt-get update && apt-get install -y git    
@@ -24,7 +24,7 @@ RUN export DEBIAN_FRONTEND noninteractive && apt-get update && apt-get install -
 USER user
 ENV HOME /home/user
 WORKDIR /home/user
-VOLUME /home/user/steam
+VOLUME /home/user/Steam
 
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 
@@ -39,7 +39,7 @@ EXPOSE 30002/udp
 EXPOSE 30003/udp
 EXPOSE 30004/udp
 
-WORKDIR "/home/user/steam/steamapps/common/Empyrion - Dedicated Server"
+WORKDIR "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 
 COPY messages.py .
 COPY dedicated_custom.yaml .
