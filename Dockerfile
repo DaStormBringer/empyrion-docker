@@ -28,10 +28,7 @@ RUN chown -R user:user "/home/user/Steam/steamapps/common/Empyrion - Dedicated S
 RUN ls -lah "/home/user/Steam"
 
 ARG target="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
-COPY --chown=user:user messages.py ${target}
-COPY --chown=user:user dedicated_custom.yaml ${target}
-COPY --chown=user:user adminconfig.yaml ${target}
-COPY --chown=user:user update ${target}
+
 
 RUN ls -lah "${target}"
 
@@ -39,6 +36,11 @@ USER user
 ENV HOME /home/user
 WORKDIR /home/user
 VOLUME /home/user/Steam
+
+COPY --chown=user:user messages.py ${target}
+COPY --chown=user:user dedicated_custom.yaml ${target}
+COPY --chown=user:user adminconfig.yaml ${target}
+COPY --chown=user:user update ${target}
 
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 
