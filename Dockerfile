@@ -25,6 +25,7 @@ USER user
 ENV HOME /home/user
 WORKDIR /home/user
 VOLUME /home/user/Steam
+ARG destination="steamapps/common/Empyrion - Dedicated Server/"
 
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 
@@ -39,11 +40,11 @@ EXPOSE 30002/udp
 EXPOSE 30003/udp
 EXPOSE 30004/udp
 
-ARG destination="Steam/steamapps/common/Empyrion - Dedicated Server/"
 
-ADD messages.py ${destination}
-ADD dedicated_custom.yaml ${destination}
-ADD adminconfig.yaml ${destination}
-ADD update ${destination}
-ADD entrypoint.sh /
+COPY messages.py ${destination}
+COPY dedicated_custom.yaml ${destination}
+COPY adminconfig.yaml ${destination}
+COPY update ${destination}
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
