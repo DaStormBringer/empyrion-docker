@@ -20,7 +20,10 @@ RUN export DEBIAN_FRONTEND noninteractive && \
     ln -s '/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/' /server && \
     useradd -m user
     
-RUN export DEBIAN_FRONTEND noninteractive && apt-get update && apt-get install -y git    
+RUN export DEBIAN_FRONTEND noninteractive && apt-get update && apt-get install -y git 
+   
+RUN mkdir -p "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
+RUN chown -R user:user "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 
 USER user
 ENV HOME /home/user
@@ -41,8 +44,6 @@ EXPOSE 30001/udp
 EXPOSE 30002/udp
 EXPOSE 30003/udp
 EXPOSE 30004/udp
-
-RUN chown -R user:user "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 
 COPY --chown=user:user messages.py .
 COPY --chown=user:user dedicated_custom.yaml .
