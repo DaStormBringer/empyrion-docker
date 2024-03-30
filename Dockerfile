@@ -30,6 +30,14 @@ RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.t
 
 # Get's killed at the end
 RUN ./steamcmd.sh +login anonymous +quit || :
+
+WORKDIR "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
+
+COPY messages.py .
+COPY dedicated_custom.yaml .
+COPY adminconfig.yaml .
+COPY update .
+
 USER root
 RUN mkdir /tmp/.X11-unix && chmod 1777 /tmp/.X11-unix
 
@@ -39,12 +47,6 @@ EXPOSE 30002/udp
 EXPOSE 30003/udp
 EXPOSE 30004/udp
 
-WORKDIR "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
-
-COPY messages.py .
-COPY dedicated_custom.yaml .
-COPY adminconfig.yaml .
-COPY update .
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
