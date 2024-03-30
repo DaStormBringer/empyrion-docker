@@ -33,7 +33,7 @@ COPY dedicated_custom.yaml ${target}
 COPY adminconfig.yaml ${target}
 COPY update ${target}
 
-RUN ls -lah ${target}
+RUN ls -lah "${target}"
 
 USER user
 ENV HOME /home/user
