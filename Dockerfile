@@ -39,7 +39,7 @@ EXPOSE 30002/udp
 EXPOSE 30003/udp
 EXPOSE 30004/udp
 
-ARG destination = "Steam/steamapps/common/Empyrion - Dedicated Server/"
+ARG destination="Steam/steamapps/common/Empyrion - Dedicated Server/"
 
 ADD messages.py ${destination}
 ADD dedicated_custom.yaml ${destination}
