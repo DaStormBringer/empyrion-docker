@@ -33,6 +33,8 @@ RUN ./steamcmd.sh +login anonymous +quit || :
 
 WORKDIR "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 
+RUN chown -R user:user "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
+
 COPY messages.py .
 COPY dedicated_custom.yaml .
 COPY adminconfig.yaml .
