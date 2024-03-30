@@ -59,4 +59,4 @@ sleep 5 # gotta wait for it to open a logfile
 tail -F Logs/current.log ../Logs/*/*.log 2>/dev/null' &
 
 # We use dedicated_custom.yaml for server setup so that game updates does not overwrite the configuration
-/opt/wine-staging/bin/wine ./EmpyrionDedicated.exe -batchmode -nographics -dedicated /dedicated_custom.yaml -logFile Logs/current.log "$@" &> Logs/wine.log
+/opt/wine-staging/bin/wine ./EmpyrionDedicated.exe -batchmode -nographics -dedicated ./dedicated_custom.yaml -logFile Logs/current.log "$@" &> Logs/wine.log
