@@ -27,9 +27,16 @@ RUN chown -R user:user "/home/user/Steam/steamapps/common/Empyrion - Dedicated S
 
 RUN ls -lah "/home/user/Steam"
 
+ARG target="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
+COPY --chown=user:user messages.py ${target}
+COPY --chown=user:user dedicated_custom.yaml ${target}
+COPY --chown=user:user adminconfig.yaml ${target}
+COPY --chown=user:user update ${target}
+
 USER user
 ENV HOME /home/user
 WORKDIR /home/user
+VOLUME /home/user/Steam
 
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 
@@ -39,7 +46,6 @@ RUN ./steamcmd.sh +login anonymous +quit || :
 USER root
 RUN mkdir /tmp/.X11-unix && chmod 1777 /tmp/.X11-unix
 
-ARG target="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 
 EXPOSE 30000/udp
 EXPOSE 30001/udp
@@ -47,13 +53,8 @@ EXPOSE 30002/udp
 EXPOSE 30003/udp
 EXPOSE 30004/udp
 
-COPY --chown=user:user messages.py ${target}
-COPY --chown=user:user dedicated_custom.yaml ${target}
-COPY --chown=user:user adminconfig.yaml ${target}
-COPY --chown=user:user update ${target}
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
-VOLUME /home/user/Steam
 
 ENTRYPOINT ["/entrypoint.sh"]
