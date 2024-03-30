@@ -35,7 +35,6 @@ RUN ls -lah "${target}"
 USER user
 ENV HOME /home/user
 WORKDIR /home/user
-VOLUME /home/user/Steam
 
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 
@@ -52,7 +51,7 @@ EXPOSE 30002/udp
 EXPOSE 30003/udp
 EXPOSE 30004/udp
 
-VOLUME "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
+WORKDIR "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 
 COPY --chown=user:user messages.py .
 COPY --chown=user:user dedicated_custom.yaml .
