@@ -25,6 +25,8 @@ RUN export DEBIAN_FRONTEND noninteractive && apt-get update && apt-get install -
 RUN mkdir -p "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 RUN chown -R user:user "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 
+RUN ls -lah "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
+
 USER user
 ENV HOME /home/user
 WORKDIR /home/user
@@ -33,8 +35,6 @@ RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.t
 
 # Get's killed at the end
 RUN ./steamcmd.sh +login anonymous +quit || :
-
-WORKDIR "Steam/steamapps/common/Empyrion - Dedicated Server"
 
 USER root
 RUN mkdir /tmp/.X11-unix && chmod 1777 /tmp/.X11-unix
