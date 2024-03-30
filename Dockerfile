@@ -24,7 +24,6 @@ RUN export DEBIAN_FRONTEND noninteractive && apt-get update && apt-get install -
 USER user
 ENV HOME /home/user
 WORKDIR /home/user
-VOLUME /home/user/Steam
 
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 
@@ -50,4 +49,7 @@ COPY adminconfig.yaml .
 COPY update .
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
+
+VOLUME /home/user/Steam
+
 ENTRYPOINT ["/entrypoint.sh"]
