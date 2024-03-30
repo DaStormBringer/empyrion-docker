@@ -26,9 +26,6 @@ RUN mkdir -p "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 RUN chown -R user:user "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 
 RUN ls -lah "/home/user/Steam"
-RUN ls -lah "/home/user/Steam/steamapps/common"
-
-RUN ls -lah "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 
 USER user
 ENV HOME /home/user
@@ -42,16 +39,18 @@ RUN ./steamcmd.sh +login anonymous +quit || :
 USER root
 RUN mkdir /tmp/.X11-unix && chmod 1777 /tmp/.X11-unix
 
+ARG target="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
+
 EXPOSE 30000/udp
 EXPOSE 30001/udp
 EXPOSE 30002/udp
 EXPOSE 30003/udp
 EXPOSE 30004/udp
 
-COPY --chown=user:user messages.py .
-COPY --chown=user:user dedicated_custom.yaml .
-COPY --chown=user:user adminconfig.yaml .
-COPY --chown=user:user update .
+COPY --chown=user:user messages.py ${target}
+COPY --chown=user:user dedicated_custom.yaml ${target}
+COPY --chown=user:user adminconfig.yaml ${target}
+COPY --chown=user:user update ${target}
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
