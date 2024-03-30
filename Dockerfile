@@ -41,9 +41,9 @@ EXPOSE 30004/udp
 
 RUN mkdir -p "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/"
 
-ADD messages.py "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/"
-ADD dedicated_custom.yaml "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/"
-ADD adminconfig.yaml "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/"
-ADD update "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/"
+ADD [messages.py "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/"]
+ADD [dedicated_custom.yaml "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/"]
+ADD [adminconfig.yaml "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/"]
+ADD [update "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/"]
 ADD entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
