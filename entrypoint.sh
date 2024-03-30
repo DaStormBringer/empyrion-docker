@@ -5,14 +5,14 @@
 ##RE 1.11 2918811239
 ##RE 2 (Alpha) 3143225812
 [ "$UID" != 0 ] || {
-    mkdir -p ~user/Steam
-    chown user: ~user/Steam
+    mkdir -p ~user/steam
+    chown user: ~user/steam
     runuser -u user "$0" "$@"
     exit 0
 }
 
-GAMEBASE="$HOME/Steam/steamapps/common/Empyrion - Dedicated Server"
-GAMEDIR="$HOME/Steam/steamapps/common/Empyrion - Dedicated Server/DedicatedServer"
+GAMEBASE="$HOME/steam/steamapps/common/Empyrion - Dedicated Server"
+GAMEDIR="$HOME/steam/steamapps/common/Empyrion - Dedicated Server/DedicatedServer"
 
 cd "$HOME"
 STEAMCMD="./steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous +app_update 530870"
@@ -24,7 +24,7 @@ STEAMCMD="./steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous +a
 eval "$STEAMCMD +quit"
 
 
-CLONEDIR="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/Content"
+CLONEDIR="/home/user/steam/steamapps/common/Empyrion - Dedicated Server/Content"
 REPO_URL="https://https://github.com/DaStormBringer/empyrion-ReforgedEden.git"
 REPO_DIR="Scenarios"
 
