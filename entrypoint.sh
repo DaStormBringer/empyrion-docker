@@ -40,7 +40,7 @@ if [ -f "$GAMEBASE/update" ]; then
       git fetch
     fi
     git checkout -f master
-    rm -f $GAMEBASE/update
+    rm -f "$GAMEBASE/update"
 else
     echo "Update not Requested. Skipping clone."
 fi
