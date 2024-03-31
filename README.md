@@ -1,5 +1,5 @@
 # empyrion-server
-**Docker image for the [Empyrion](https://empyriongame.com/) dedicated server with Reforged Eden using WINE**
+**Docker image for the [Empyrion](https://empyriongame.com/) dedicated server with [Reforged Eden](https://steamcommunity.com/sharedfiles/filedetails/?id=2550354956) using WINE**
 
 The image itself contains WINE and steamcmd, along with an entrypoint.sh script that bootstraps the Empyrion dedicated server install via steamcmd.
 
@@ -24,11 +24,13 @@ docker run -di --name emp -p 30000:30000/udp -p 30001:30001/udp --restart unless
 After first run you can use:
 ```
 docker start emp
+```
+```
 docker stop emp
 ```
 to control the server
 
-You can use `docker logs -f emp` to view the logs and progression of the server
+You can use ```docker logs -f emp``` to view the logs and progression of the server
 
 The server will take a LONG time to start on the first run. It has to download steam and the Reforged Eden files. (expect 15-30 minutes)
 
