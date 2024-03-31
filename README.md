@@ -1,29 +1,41 @@
 # empyrion-server
-**Docker image for the [Empyrion](https://empyriongame.com/) dedicated server using WINE**
+**Docker image for the [Empyrion](https://empyriongame.com/) dedicated server with Reforged Eden using WINE**
 
 The image itself contains WINE and steamcmd, along with an entrypoint.sh script that bootstraps the Empyrion dedicated server install via steamcmd.
 
-When running the image, mount the volume /home/user/Steam, to persist the Empyrion install and avoid downloading it on each container start.
-Sample invocation:
+When running the image, it will mount the volume /home/user/Steam, to persist the Empyrion install and avoid downloading it on each container start.
+The configuration files will be under `gamedir/steamapps/common/Empyrion - Dedicated Server`
+
+Starting Commands:
 ```
 cd empyrion-docker
 docker build -t empyrion-dedicated-server .
 mkdir -p gamedir
 docker run -di --name emp -p 30000:30000/udp -p 30001:30001/udp --restart unless-stopped -v $PWD/gamedir:/home/user/Steam empyrion-dedicated-server
-
+```
+```
 # for experimental version:
 cd empyrion-docker
 docker build -t empyrion-dedicated-server .
 mkdir -p gamedir_beta
 docker run -di --name emp -p 30000:30000/udp -p 30001:30001/udp --restart unless-stopped -v $PWD/gamedir_beta:/home/user/Steam -e BETA=1 empyrion-dedicated-server
-
-after first run you can use:
-docker start emp
-docker stop emp  
-to control the server
 ```
 
-After starting the server, you can edit the dedicated.yaml file at 'gamedir/steamapps/common/Empyrion - Dedicated Server/dedicated.yaml'.
+After first run you can use:
+```
+docker start emp
+docker stop emp
+```
+to control the server
+
+You can use `docker logs -f emp` to view the logs and progression of the server
+
+The server will take a LONG time to start on the first run. It has to download steam and the Reforged Eden files. (expect 15-30 minutes)
+
+If you want to update Reforged Eden then use  `touch update` in the `gamedir/steamapps/common/Empyrion - Dedicated Server` and restart the server
+This will cause it to do a git update and pull any updated files.
+
+After starting the server, you can edit the dedicated_.yaml file at 'gamedir/steamapps/common/Empyrion - Dedicated Server/dedicated_custom.yaml'.
 You'll need to restart the docker container after editing.
 
 The DedicatedServer folder has been symlinked to /server, so that you can refer to saves with z:/server/Saves (for instance the save called The\_Game):
