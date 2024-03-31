@@ -3,7 +3,8 @@
 
 The image itself contains WINE and steamcmd, along with an entrypoint.sh script that bootstraps the Empyrion dedicated server install via steamcmd.
 
-When running the image, it will mount the volume /home/user/Steam, to persist the Empyrion install and avoid downloading it on each container start.
+When running the image, it will mount the volume /home/user/Steam to persist the Empyrion install and avoid downloading it on each container start.
+
 The configuration files will be under `gamedir/steamapps/common/Empyrion - Dedicated Server`
 
 Starting Commands:
@@ -30,11 +31,11 @@ docker stop emp
 ```
 to control the server
 
-You can use 
+To view the logs in real time you can:
 ```
 docker logs -f emp
 ``` 
-to view the logs and progression of the server
+
 
 The server will take a LONG time to start on the first run. It has to download steam and the Reforged Eden files. (expect 15-30 minutes)
 
@@ -44,7 +45,7 @@ This will cause it to do a git update and pull any updated files.
 After starting the server, you can edit the dedicated_custom.yaml file at 'gamedir/steamapps/common/Empyrion - Dedicated Server/dedicated_custom.yaml'.
 You'll need to restart the docker container after editing.
 
-If you want to pick Reforged Eden 1 and not Reforged Eden 2 then edit the `dedicated_custom.yaml` before your first start and uncomment the Reforged Eden 1 section and comment out the Reforged Eden 2 section
+If you want to pick Reforged Eden 1 and not Reforged Eden 2 then edit the `dedicated_custom.yaml` before the first start and uncomment the Reforged Eden 1 section and comment out the Reforged Eden 2 section
 
 ```
 # Pick one and uncomment/comment the other  
