@@ -23,24 +23,29 @@ STEAMCMD="./steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous +a
 # eval to support quotes in $STEAMCMD
 eval "$STEAMCMD +quit"
 
+cp /tmp/server/* "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 
-CLONEDIR="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/Content"
+CLONEDIR="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/Content/Scenarios"
 REPO_URL="https://https://github.com/DaStormBringer/empyrion-ReforgedEden.git"
-REPO_DIR="Scenarios"
 
 
 # use [ touch update ] to create a file in the base game dir. If it exsists git will update the file
 if [ -f "$GAMEBASE/update" ]; then
     cd "$CLONEDIR"  
-    git clone "$REPO_URL" "$REPO_DIR"
-    rm -f "$GAMEBASE/$UPDATEFILE"
+    if [ ! -d "$CLONEDIR/.git" ]; then
+      git init
+      git remote add origin https://github.com/DaStormBringer/empyrion-ReforgedEden
+      git fetch
+    fi
+    git checkout -f master
+    rm -f $GAMEBASE/update
 else
     echo "Update not Requested. Skipping clone."
 fi
 
 # if the Admin Config is in the base Directory move it to the correct dir
 if [ -f "$GAMEBASE/adminconfig.yaml" ]; then
-	 mv "$GAMEBASE"/adminconfig.yaml "$GAMEBASE"/Saves
+         mv "$GAMEBASE"/adminconfig.yaml "$GAMEBASE"/Saves
 fi
 
 mkdir -p "$GAMEDIR"/Logs
@@ -59,4 +64,4 @@ sleep 5 # gotta wait for it to open a logfile
 tail -F Logs/current.log ../Logs/*/*.log 2>/dev/null' &
 
 # We use dedicated_custom.yaml for server setup so that game updates does not overwrite the configuration
-/opt/wine-staging/bin/wine ./EmpyrionDedicated.exe -batchmode -nographics -dedicated ./dedicated_custom.yaml -logFile Logs/current.log "$@" &> Logs/wine.log
+/opt/wine-staging/bin/wine ./EmpyrionDedicated.exe -batchmode -nographics -dedicated ../dedicated_custom.yaml -logFile Logs/current.log "$@" &> Logs/wine.log

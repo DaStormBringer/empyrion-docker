@@ -21,16 +21,13 @@ RUN export DEBIAN_FRONTEND noninteractive && \
     useradd -m user
     
 RUN export DEBIAN_FRONTEND noninteractive && apt-get update && apt-get install -y git 
+
+RUN mkdir /tmp/server && chmod 1777 /tmp/server
    
 RUN mkdir -p "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
-RUN chown -R user:user "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
-
-RUN ls -lah "/home/user/Steam"
-
-ARG target="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
-
-
-RUN ls -lah "${target}"
+ARG target="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/"
+COPY messages.py dedicated_custom.yaml adminconfig.yaml update /tmp/server/
+RUN chown -Rv user:user "/home/user/Steam/steamapps/"
 
 USER user
 ENV HOME /home/user
@@ -41,9 +38,14 @@ RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.t
 # Get's killed at the end
 RUN ./steamcmd.sh +login anonymous +quit || :
 
+# try to setup and insert files into the server
 USER root
-RUN mkdir /tmp/.X11-unix && chmod 1777 /tmp/.X11-unix
 
+RUN ls -lahR /home/user/Steam
+
+USER root
+
+RUN ls -laR /tmp
 
 EXPOSE 30000/udp
 EXPOSE 30001/udp
@@ -51,15 +53,9 @@ EXPOSE 30002/udp
 EXPOSE 30003/udp
 EXPOSE 30004/udp
 
-WORKDIR "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
-
-COPY --chown=user:user messages.py .
-COPY --chown=user:user dedicated_custom.yaml .
-COPY --chown=user:user adminconfig.yaml .
-COPY --chown=user:user update .
-
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
 
 ENTRYPOINT ["/entrypoint.sh"]
+#ENTRYPOINT ["/bin/bash"]
