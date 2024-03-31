@@ -23,11 +23,13 @@ STEAMCMD="./steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous +a
 # eval to support quotes in $STEAMCMD
 eval "$STEAMCMD +quit"
 
-cp /tmp/server/* "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
+# move the configuration files into the dir structure if they haven't already been placed
+if [ ! -f "$GAMEBASE/dedicated_custom.yaml" ]; then
+        cp /tmp/server/* "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
+fi
 
 CLONEDIR="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/Content/Scenarios"
 REPO_URL="https://https://github.com/DaStormBringer/empyrion-ReforgedEden.git"
-
 
 # use [ touch update ] to create a file in the base game dir. If it exsists git will update the file
 if [ -f "$GAMEBASE/update" ]; then

@@ -22,10 +22,8 @@ RUN export DEBIAN_FRONTEND noninteractive && \
     
 RUN export DEBIAN_FRONTEND noninteractive && apt-get update && apt-get install -y git 
 
-RUN mkdir /tmp/server && chmod 1777 /tmp/server
-   
-RUN mkdir -p "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
-ARG target="/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/"
+RUN mkdir /tmp/server && chmod 1777 /tmp/server && mkdir -p "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
+
 COPY messages.py dedicated_custom.yaml adminconfig.yaml update /tmp/server/
 RUN chown -Rv user:user "/home/user/Steam/steamapps/"
 
@@ -38,14 +36,7 @@ RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.t
 # Get's killed at the end
 RUN ./steamcmd.sh +login anonymous +quit || :
 
-# try to setup and insert files into the server
 USER root
-
-RUN ls -lahR /home/user/Steam
-
-USER root
-
-RUN ls -laR /tmp
 
 EXPOSE 30000/udp
 EXPOSE 30001/udp
@@ -58,4 +49,3 @@ RUN chmod +x /entrypoint.sh
 
 
 ENTRYPOINT ["/entrypoint.sh"]
-#ENTRYPOINT ["/bin/bash"]
