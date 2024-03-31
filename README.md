@@ -33,7 +33,8 @@ to control the server
 You can use 
 ```
 docker logs -f emp
-``` to view the logs and progression of the server
+``` 
+to view the logs and progression of the server
 
 The server will take a LONG time to start on the first run. It has to download steam and the Reforged Eden files. (expect 15-30 minutes)
 
