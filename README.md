@@ -30,15 +30,36 @@ docker stop emp
 ```
 to control the server
 
-You can use ```docker logs -f emp``` to view the logs and progression of the server
+You can use 
+```
+docker logs -f emp
+``` to view the logs and progression of the server
 
 The server will take a LONG time to start on the first run. It has to download steam and the Reforged Eden files. (expect 15-30 minutes)
 
 If you want to update Reforged Eden then use  `touch update` in the `gamedir/steamapps/common/Empyrion - Dedicated Server` and restart the server
 This will cause it to do a git update and pull any updated files.
 
-After starting the server, you can edit the dedicated_.yaml file at 'gamedir/steamapps/common/Empyrion - Dedicated Server/dedicated_custom.yaml'.
+After starting the server, you can edit the dedicated_custom.yaml file at 'gamedir/steamapps/common/Empyrion - Dedicated Server/dedicated_custom.yaml'.
 You'll need to restart the docker container after editing.
+
+If you want to pick Reforged Eden 1 and not Reforged Eden 2 then edit the `dedicated_custom.yaml` before your first start and uncomment the  
+Reforged Eden 1 section and comment out the Reforged Eden 2 section
+
+```
+# Pick one and uncomment/comment the other  
+GameConfig:
+  GameName: Reforged Eden 2
+  Mode: Survival
+  Seed: 1011345
+  CustomScenario: Reforged Eden 2
+  
+#GameConfig:
+#  GameName: Reforged Eden
+#  Mode: Survival
+#  Seed: 1011345
+#  CustomScenario: Reforged Eden
+```
 
 The DedicatedServer folder has been symlinked to /server, so that you can refer to saves with z:/server/Saves (for instance the save called The\_Game):
 ```
