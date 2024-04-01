@@ -7,7 +7,7 @@
 [ "$UID" != 0 ] || {
     mkdir -p ~user/Steam
     chown user: ~user/Steam
-    runuser -u user "$0" "$@"
+    runuser -u user -- "$0" "$@"
     exit 0
 }
 
