@@ -2,8 +2,9 @@
 FROM ubuntu:jammy
 
 LABEL maintainer="DaStormBringer"
-LABEL version="0.1"
-LABEL description="Dedicated Empyrion Server for either Reforged Eden or Reforged Eden 2 Alpha"
+LABEL org.opencontainers.image.description="Dedicated Empyrion Server for either Reforged Eden or Reforged Eden 2 Alpha"
+LABEL org.opencontainers.image.source=https://github.com/DaStormBringer/empyrion-docker
+LABEL version="0.2"
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
