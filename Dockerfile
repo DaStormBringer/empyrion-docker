@@ -19,14 +19,18 @@ RUN export DEBIAN_FRONTEND noninteractive && \
     apt-get install -y wine-staging wine-staging-i386 wine-staging-amd64 winetricks && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get clean && \
-    ln -s '/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/' /server && \
     useradd -m user
 
 COPY entrypoint.sh /
 
 RUN export DEBIAN_FRONTEND noninteractive && apt-get update && apt-get install -y git && \
-    mkdir /tmp/server && chmod 1777 /tmp/server && mkdir -p "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server" && \
-    chmod +x /entrypoint.sh && chown -Rv user:user "/home/user/Steam/steamapps/"
+    mkdir /tmp/server && \
+    chmod 1777 /tmp/server && \
+    mkdir -p "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server" && \
+    chown -Rv user:user "/home/user/Steam/steamapps/" && \
+    ln -s '/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/' /server && \
+    chmod +x /entrypoint.sh && \
+    chown -Rv user:user "/home/user/Steam/steamapps/"
 
 COPY messages.py dedicated_custom.yaml adminconfig.yaml update /tmp/server/
 		
