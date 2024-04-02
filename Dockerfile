@@ -4,7 +4,7 @@ FROM ubuntu:jammy
 LABEL maintainer="DaStormBringer"
 LABEL org.opencontainers.image.description="Dedicated Empyrion Server for either Reforged Eden or Reforged Eden 2 Alpha"
 LABEL org.opencontainers.image.source=https://github.com/DaStormBringer/empyrion-docker
-LABEL version="0.2"
+LABEL version="0.3"
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
@@ -18,35 +18,27 @@ RUN export DEBIAN_FRONTEND noninteractive && \
     apt-add-repository -y 'deb https://dl.winehq.org/wine-builds/ubuntu/ jammy main' && \
     apt-get install -y wine-staging wine-staging-i386 wine-staging-amd64 winetricks && \
     rm -rf /var/lib/apt/lists/* && \
+    apt-get clean && \
     ln -s '/home/user/Steam/steamapps/common/Empyrion - Dedicated Server/' /server && \
     useradd -m user
     
-RUN export DEBIAN_FRONTEND noninteractive && apt-get update && apt-get install -y git 
-
-RUN mkdir /tmp/server && chmod 1777 /tmp/server && mkdir -p "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
+RUN export DEBIAN_FRONTEND noninteractive && apt-get update && apt-get install -y git && \
+    mkdir /tmp/server && chmod 1777 /tmp/server && mkdir -p "/home/user/Steam/steamapps/common/Empyrion - Dedicated Server"
 
 COPY messages.py dedicated_custom.yaml adminconfig.yaml update /tmp/server/
-RUN chown -Rv user:user "/home/user/Steam/steamapps/"
+COPY entrypoint.sh /
+RUN chown -Rv user:user "/home/user/Steam/steamapps/" && \
+		chmod +x /entrypoint.sh
+		
+EXPOSE 30000/udp
+EXPOSE 30001/udp
 
 USER user
 ENV HOME /home/user
 WORKDIR /home/user
 
-RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
-
-# Get's killed at the end
-RUN ./steamcmd.sh +login anonymous +quit || :
-
-USER root
-
-EXPOSE 30000/udp
-EXPOSE 30001/udp
-EXPOSE 30002/udp
-EXPOSE 30003/udp
-EXPOSE 30004/udp
-
-COPY entrypoint.sh /
-RUN chmod +x /entrypoint.sh
-
+RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf - && \
+   ./steamcmd.sh +login anonymous +quit || :
 
 ENTRYPOINT ["/entrypoint.sh"]
+
